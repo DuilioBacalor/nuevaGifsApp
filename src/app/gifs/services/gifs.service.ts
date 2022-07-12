@@ -20,6 +20,7 @@ private apiKey='ymLltV1dpkS9w5wR1Ae6X5mR2ny402CG';
 
   // if(localStorage.getItem('historial')){
     this._historial= JSON.parse(localStorage.getItem('historial')!) || [];
+    this.resultados=JSON.parse(localStorage.getItem('resultados')!) || [];
   // }
   
 
@@ -37,6 +38,7 @@ if(!this._historial.includes(query)){
   .subscribe((resp)=>{
     console.log(resp.data);
     this.resultados=resp.data;
+    localStorage.setItem('resultados',JSON.stringify(this.resultados) );
   });
 
 
