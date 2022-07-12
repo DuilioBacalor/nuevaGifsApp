@@ -17,6 +17,10 @@ private apiKey='ymLltV1dpkS9w5wR1Ae6X5mR2ny402CG';
  }
 
  constructor(private http:HttpClient){
+
+  // if(localStorage.getItem('historial')){
+    this._historial= JSON.parse(localStorage.getItem('historial')!) || [];
+  // }
   
 
  }
@@ -27,6 +31,8 @@ private apiKey='ymLltV1dpkS9w5wR1Ae6X5mR2ny402CG';
 if(!this._historial.includes(query)){
   this._historial.unshift(query);
   this._historial=this._historial.splice(0,10);
+  localStorage.setItem('historial',JSON.stringify(this._historial) );
+}
   this.http.get<SearchGifsResponse>(`https://api.giphy.com/v1/gifs/search?api_key=ymLltV1dpkS9w5wR1Ae6X5mR2ny402CG&q=${query} z&limit=10`)
   .subscribe((resp)=>{
     console.log(resp.data);
@@ -35,8 +41,8 @@ if(!this._historial.includes(query)){
 
 
 
-}
 
-console.log(this._historial);
+
+ console.log(this._historial);
+  }
  }
-}
